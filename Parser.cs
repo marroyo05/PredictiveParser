@@ -13,13 +13,11 @@ namespace PredictiveParser
         private static Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>> XDict = new Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>>();
         private static Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>> TDict = new Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>>();
         private static Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>> YDict = new Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>>();
-        private static Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>> EpsDict = new Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>>();
-        private static Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>> TermDict = new Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>>();
 
 
         private static Queue<Token> tokens = new Queue<Token>();
 
-        //delegates(E,T,X,Y,EPS,TERM)
+        //Delegates to Check Dictionary
         private static bool E(Queue<Token> t) 
         {
             if (!EDict.ContainsKey(t.First().type))
@@ -29,7 +27,10 @@ namespace PredictiveParser
             var EList = EDict[t.First().type];
             for (int i = 0; i < EList.Count; i++)
             {
-                EList[i](t);
+                if (!EList[i](t))
+                {
+                    return false;
+                }
             }
             if (tokens.First().token == "$") {
                 return true; 
@@ -46,7 +47,10 @@ namespace PredictiveParser
             var XList = XDict[t.First().type];
             for (int i = 0; i < XList.Count; i++)
             {
-                XList[i](t);
+                if (!XList[i](t))
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -61,7 +65,10 @@ namespace PredictiveParser
             var TList = TDict[t.First().type];
             for (int i = 0; i < TList.Count; i++)
             {
-                TList[i](t);
+                if (!TList[i](t))
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -76,7 +83,10 @@ namespace PredictiveParser
             var YList = YDict[t.First().type];
             for (int i = 0; i < YList.Count; i++)
             {
-                YList[i](t);
+                if (!YList[i](t))
+                {
+                    return false;
+                }
             }
 
             return true;
