@@ -27,7 +27,10 @@ namespace PredictiveParser
             var EList = EDict[t.First().type];
             for (int i = 0; i < EList.Count; i++)
             {
-                EList[i](t);
+                if (!EList[i](t))
+                {
+                    return false;
+                }
             }
             if (tokens.First().token == "$") {
                 return true; 
@@ -44,7 +47,10 @@ namespace PredictiveParser
             var XList = XDict[t.First().type];
             for (int i = 0; i < XList.Count; i++)
             {
-                XList[i](t);
+                if (!XList[i](t))
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -59,7 +65,10 @@ namespace PredictiveParser
             var TList = TDict[t.First().type];
             for (int i = 0; i < TList.Count; i++)
             {
-                TList[i](t);
+                if (!TList[i](t))
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -74,7 +83,10 @@ namespace PredictiveParser
             var YList = YDict[t.First().type];
             for (int i = 0; i < YList.Count; i++)
             {
-                YList[i](t);
+                if (!YList[i](t))
+                {
+                    return false;
+                }
             }
 
             return true;
