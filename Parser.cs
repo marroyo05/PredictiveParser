@@ -13,13 +13,11 @@ namespace PredictiveParser
         private static Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>> XDict = new Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>>();
         private static Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>> TDict = new Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>>();
         private static Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>> YDict = new Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>>();
-        private static Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>> EpsDict = new Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>>();
-        private static Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>> TermDict = new Dictionary<Token.TokenType, List<Func<Queue<Token>, bool>>>();
 
 
         private static Queue<Token> tokens = new Queue<Token>();
 
-        //delegates(E,T,X,Y,EPS,TERM)
+        //Delegates to Check Dictionary
         private static bool E(Queue<Token> t) 
         {
             if (!EDict.ContainsKey(t.First().type))
